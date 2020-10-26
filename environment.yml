@@ -1,0 +1,9 @@
+name: bench
+channels:
+    - https://www.idiap.ch/software/bob/conda
+    - defaults
+dependencies:
+    - numpy
+    - numba
+    - matplotlib
+    - bob.blitz
