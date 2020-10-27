@@ -2,8 +2,10 @@ name: bench
 channels:
     - https://www.idiap.ch/software/bob/conda
     - defaults
+    - anaconda
 dependencies:
     - numpy
     - numba
     - matplotlib
     - bob.blitz
+    - tensorflow
