@@ -1,0 +1,55 @@
+use StdIO: all;
+use Array: all;
+use Rand: all;
+use RTClock: all;
+use RTimer: all;
+
+
+int main()
+{
+    int secs;
+    int nsecs;
+    double ms;
+    double time;
+    n = 10000;
+    shape = [n, n];
+
+    timerAll = createRTimer();
+    startRTimer(timerAll);
+    a = random(shape, 0, 2);
+    b = random(shape, 0, 2);
+    stopRTimer(timerAll);
+
+    timer = createRTimer();
+    startRTimer(timer);
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+
+    stopRTimer(timer);
+
+    secs, nsecs = getRTimerInts(timerAll);
+    ns = tod(nsecs);
+       
+    time = getRTimerDbl(timerAll);
+    printf("Allocation time:\n");
+    printf("nanos=%f, t=%f\n", ns, time);
+
+    secs, nsecs = getRTimerInts(timer);
+    ns = tod(nsecs);
+    
+    time = getRTimerDbl(timer);
+    printf("Product time:\n");
+    printf("nanos=%f, t=%f\n", ns, time);
+
+    destroyRTimer(timer);
+    destroyRTimer(timerAll);
+    return 0;
+}

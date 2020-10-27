@@ -14,21 +14,19 @@ int main() {
 
     float wtime;
     wtime = omp_get_wtime();
-    float **a = new float *[n];
-    float **b = new float *[n];
-    float **c = new float *[n];
 
-    for (size_t i = 0; i < n; ++i) {
-        a[i] = new float[n];
-        b[i] = new float[n];
-        c[i] = new float[n];
-    }
+
+    float *a = (float*)malloc(n*n*sizeof(float));
+    float *b = (float*)malloc(n*n*sizeof(float));
+    float *c = (float*)malloc(n*n*sizeof(float));
+
+    cout << "row size=" << n*sizeof(float) << endl;
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
-            a[i][j] = rand();
-            b[i][j] = rand();
-            c[i][j] = rand();
+            a[i*n+j] = rand();
+            b[i*n+j] = rand();
+            c[i*n+j] = 0.0;
         }
     }
 
@@ -44,9 +42,9 @@ int main() {
     # pragma omp for
     for (i = 0; i < n; ++i) {
         for (j = 0; j < n; ++j) {
-            c[i][j] = 0.0;
+            c[i*n+j] = 0.0;
             for (k = 0; k < n; ++k) {
-                c[i][j] = c[i][j] + a[i][k] * b[k][j];
+                c[i*n+j] = c[i*n+j] + a[i*n+k] * b[j*n+k];
             }
         }
     }
