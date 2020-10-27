@@ -9,7 +9,10 @@ https://github.com/bennylp/awesome-cpp-ml
 
 https://www.gnu.org/software/gcc/testing/testing-blitz.html
 
+https://github.com/MaxKotlan/Cuda-Matrix-Multiplication-Benchmark
 
+https://hduongtrong.github.io/2016/03/07/Matrix-Multiplication-Benchmark/
+https://dzhelil.info/2019/07/17/cbench.html
 # Heh
 
 Intermediate functional language.
