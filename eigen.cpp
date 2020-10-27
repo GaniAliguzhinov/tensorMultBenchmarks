@@ -1,8 +1,6 @@
 #ifndef _mm256_set_m128d
-#ifdef _mm256_insertf128_pd
 #define _mm256_set_m128d(vh, vl) \
         _mm256_insertf128_pd(_mm256_castpd128_pd256(vl), (vh), 1)
-#endif
 #endif
 
 #include <iostream>
