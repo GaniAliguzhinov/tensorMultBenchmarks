@@ -18,7 +18,7 @@ using namespace ranlib;
 
 int main() {
 
-    int n = 100;
+    int n = 1000;
     Array<float, 2> A(n,n), B(n,n), C(n,n);
     Uniform<float> rand;
     rand.seed(23);

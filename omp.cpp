@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <cmath>
 #include <ctime>
 #include <omp.h>
@@ -9,21 +10,36 @@ int main();
 
 
 int main() {
-    size_t n = 400;
-    double a[n][n];
-    double b[n][n];
-    double c[n][n];
+    size_t n = 1000;
+
+    float wtime;
+    wtime = omp_get_wtime();
+    float **a = new float *[n];
+    float **b = new float *[n];
+    float **c = new float *[n];
+
+    for (size_t i = 0; i < n; ++i) {
+        a[i] = new float[n];
+        b[i] = new float[n];
+        c[i] = new float[n];
+    }
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            a[i][j] = rand();
+            b[i][j] = rand();
+            c[i][j] = rand();
+        }
+    }
+
     int i, j, k;
     int thread_num;
-    double wtime;
 
-
+    cout << "Allocated in \t" << omp_get_wtime() - wtime << " seconds\n";
     thread_num = omp_get_max_threads();
 
     cout << "threads:\t" << thread_num << "\n";
     wtime = omp_get_wtime();
-
-
 
     # pragma omp for
     for (i = 0; i < n; ++i) {
@@ -36,7 +52,6 @@ int main() {
     }
     wtime = omp_get_wtime() - wtime;
     cout << "Elapsed:\t" << wtime << "\n";
-
     return 0;
 }
 
