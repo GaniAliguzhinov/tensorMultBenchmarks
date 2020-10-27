@@ -10,7 +10,7 @@ int main();
 
 
 int main() {
-    size_t n = 2000;
+    size_t n = 1000;
 
     float wtime;
     wtime = omp_get_wtime();

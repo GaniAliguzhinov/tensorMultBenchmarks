@@ -14,7 +14,7 @@ using namespace std;
 int main() {
 
     auto t1 = chrono::high_resolution_clock::now();
-    int n = 10000;
+    int n = 1000;
     MatrixXf a = MatrixXf::Random(n, n);
     MatrixXf b = MatrixXf::Random(n, n);
     MatrixXf c = MatrixXf::Random(n, n);

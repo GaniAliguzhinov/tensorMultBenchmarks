@@ -13,7 +13,7 @@ https://sanjayasubedi.com.np/python/efficient-matrix-multiplication-in-python/
 """
 global A, B
 
-n = 10000
+n = 1000
 A = numpy.random.rand(n, n).astype(numpy.float32)
 B = numpy.random.rand(n, n).astype(numpy.float32)
 def matmul1(a, b):
