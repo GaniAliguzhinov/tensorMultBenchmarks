@@ -20,7 +20,7 @@ int main() {
     float *b = (float*)malloc(n*n*sizeof(float));
     float *c = (float*)malloc(n*n*sizeof(float));
 
-    cout << "row size=" << n*sizeof(float) << endl;
+    cout << "n = " << n << endl;
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -33,10 +33,9 @@ int main() {
     int i, j, k;
     int thread_num;
 
-    cout << "Allocated in \t" << omp_get_wtime() - wtime << " seconds\n";
+    cout << "Allocation time:\n\t" << 1000.0*(omp_get_wtime() - wtime) << " ms\n";
     thread_num = omp_get_max_threads();
 
-    cout << "threads:\t" << thread_num << "\n";
     wtime = omp_get_wtime();
 
     # pragma omp for
@@ -49,7 +48,6 @@ int main() {
         }
     }
     wtime = omp_get_wtime() - wtime;
-    cout << "Elapsed:\t" << wtime << "\n";
+    cout << "Product time:\n\t" << 1000.0*wtime << " ms\n";
     return 0;
 }
-

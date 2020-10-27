@@ -27,8 +27,9 @@ int main() {
     auto t3 = chrono::high_resolution_clock::now();
     auto durationAll = chrono::duration_cast<chrono::microseconds>(t2-t1).count();
     auto duration = chrono::duration_cast<chrono::microseconds>(t3-t2).count();
-    cout << "(n=" << std::setw(10) << n << ", ";
-    cout << "t=" << durationAll/1000.0 << ")\n";
-    cout << "t=" << duration/1000.0 << ")\n";
-
+    cout << "n = " << n << "\n";
+    cout << "Allocation time:\n\t";
+    cout << durationAll/1000.0 << " ms\n";
+    cout << "Product time:\n\t";
+    cout << duration/1000.0 << "ms\n";
 }

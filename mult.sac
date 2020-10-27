@@ -12,6 +12,7 @@ int main()
     double ms;
     double time;
     n = 1000;
+    printf("n = %d\n", n);
     shape = [n, n];
 
     timerAll = createRTimer();
@@ -35,19 +36,15 @@ int main()
 
     stopRTimer(timer);
 
-    secs, nsecs = getRTimerInts(timerAll);
-    ns = tod(nsecs);
-       
     time = getRTimerDbl(timerAll);
+    time = time*1000.0;
     printf("Allocation time:\n");
-    printf("nanos=%f, t=%f\n", ns, time);
+    printf("\t%f ms\n", time);
 
-    secs, nsecs = getRTimerInts(timer);
-    ns = tod(nsecs);
-    
     time = getRTimerDbl(timer);
+    time = time*1000.0;
     printf("Product time:\n");
-    printf("nanos=%f, t=%f\n", ns, time);
+    printf("\t%f ms\n", time);
 
     destroyRTimer(timer);
     destroyRTimer(timerAll);
