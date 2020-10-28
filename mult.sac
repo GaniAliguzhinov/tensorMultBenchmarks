@@ -4,51 +4,53 @@ use Rand: all;
 use RTimer: all;
 use Clock: {time, gettime, difftime};
 
+inline float product(float[*]a, float[*] b)
+{
+
+	reps = 10;
+	while (reps > 0) {
+		b = {[i, j] -> sum(a[[i,.]] * b[[., j]])};
+		reps = reps - 1;
+	}
+	return b[0,0];
+}
 float timeProduct(int n)
 {
-    float t;
-    reps = 1;
-    mint = tof(100000.0);
-    maxt = tof(0.0);
-    shape = [n, n];
+	float t;
+	mint = tof(100000.0);
+	maxt = tof(0.0);
+	shape = [n, n];
 
-        a = tof(random(shape, -1.0, 1.0));
-        b = tof(random(shape, -1.0, 1.0));
+	a = tof(random(shape, -1.0, 1.0));
+	b = tof(random(shape, -1.0, 1.0));
 
-    while (reps > 0) {
-        timer = createRTimer();
-        startRTimer(timer);
-        b = {[i, j] -> sum(a[[i,.]] * b[[., j]])};
-        stopRTimer(timer);
-
-        t = tof(getRTimerDbl(timer));
-        t = tof(t*tof(1000.0));
-        destroyRTimer(timer);
-        if (t < mint) mint = t;
-        if (t > maxt) maxt = t;
-        reps = reps - 1;
-    }
-    printf(" %.1f ", b[0,0]);
-    return mint;
+	b = {[i, j] -> sum(a[[i,.]] * b[[., j]])};
+	timer = createRTimer();
+	startRTimer(timer);
+	
+	res = product(a, b);
+	stopRTimer(timer);
+	t = tof(getRTimerDbl(timer));
+	t = tof(t*tof(1000.0));
+	destroyRTimer(timer);
+	printf("%.3f ", t);
+	return res;
 }
 int main()
 {
-    startn = 100;
-    increment = 10;
-    count = 10;
-    times = tof(genarray([count], 0.0));
+	startn = 100;
+	increment = 10;
+	count = 100;
+	i = 0;
+	j = 0;
+	times = tof(genarray([count], 0.0));
 
-    while(count > 0) {
-        times[10-count] = timeProduct(startn);
-        count = count - 1;
-        startn = startn + increment;
-    }
+	while(i < count) {
+		times[i] = timeProduct(startn);
+		i++;
+		startn = startn + increment;
+	}
 
-    count = 10;
-    while(count > 0) {
-        printf("%.3f ", times[10-count]);
-        count--;
-    }
 
-    return 0;
+	return 0;
 }
