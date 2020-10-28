@@ -1,52 +1,54 @@
 use StdIO: all;
 use Array: all;
 use Rand: all;
-use RTClock: all;
 use RTimer: all;
+use Clock: {time, gettime, difftime};
 
-
-int main()
+float timeProduct(int n)
 {
-    int secs;
-    int nsecs;
-    double ms;
-    double time;
-    n = 1000;
-    printf("n = %d\n", n);
+    float t;
+    reps = 1;
+    mint = tof(100000.0);
+    maxt = tof(0.0);
     shape = [n, n];
 
-    timerAll = createRTimer();
-    startRTimer(timerAll);
-    a = random(shape, 0, 2);
-    b = random(shape, 0, 2);
-    stopRTimer(timerAll);
+        a = tof(random(shape, -1.0, 1.0));
+        b = tof(random(shape, -1.0, 1.0));
 
-    timer = createRTimer();
-    startRTimer(timer);
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
-    b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+    while (reps > 0) {
+        timer = createRTimer();
+        startRTimer(timer);
+        b = {[i, j] -> sum(a[[i,.]] * b[[., j]])};
+        stopRTimer(timer);
 
-    stopRTimer(timer);
+        t = tof(getRTimerDbl(timer));
+        t = tof(t*tof(1000.0));
+        destroyRTimer(timer);
+        if (t < mint) mint = t;
+        if (t > maxt) maxt = t;
+        reps = reps - 1;
+    }
+    printf(" %.1f ", b[0,0]);
+    return mint;
+}
+int main()
+{
+    startn = 100;
+    increment = 10;
+    count = 10;
+    times = tof(genarray([count], 0.0));
 
-    time = getRTimerDbl(timerAll);
-    time = time*1000.0;
-    printf("Allocation time:\n");
-    printf("\t%f ms\n", time);
+    while(count > 0) {
+        times[10-count] = timeProduct(startn);
+        count = count - 1;
+        startn = startn + increment;
+    }
 
-    time = getRTimerDbl(timer);
-    time = time*1000.0;
-    printf("Product time:\n");
-    printf("\t%f ms\n", time);
+    count = 10;
+    while(count > 0) {
+        printf("%.3f ", times[10-count]);
+        count--;
+    }
 
-    destroyRTimer(timer);
-    destroyRTimer(timerAll);
     return 0;
 }

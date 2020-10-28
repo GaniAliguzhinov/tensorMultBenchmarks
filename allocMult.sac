@@ -1,0 +1,45 @@
+use StdIO: all;
+use Array: all;
+use Rand: all;
+use RTimer: all;
+use Clock: {time, gettime, difftime};
+
+double timeProduct(int n)
+{
+    double t;
+    reps = 10;
+    mint = 100000.0;
+    maxt = 0.0;
+    shape = [n, n];
+
+    while (reps > 0) {
+        timer = createRTimer();
+        startRTimer(timer);
+        a = random(shape, 0.0, 2.0);
+        b = random(shape, 0.0, 2.0);
+        b = {[i, j] -> sum(a[[i, .]] * b[[.,j]])};
+        stopRTimer(timer);
+
+        t = getRTimerDbl(timer);
+        t = t*1000.0;
+        destroyRTimer(timer);
+        if (t < mint) mint = t;
+        if (t > maxt) maxt = t;
+        reps = reps - 1;
+    }
+    return mint;
+}
+int main()
+{
+    startn = 100;
+    increment = 10;
+    count = 100;
+    
+    while(count > 0) {
+        printf("%.3f ", timeProduct(startn));
+        count = count - 1;
+        startn = startn + increment;
+    }
+
+    return 0;
+}
