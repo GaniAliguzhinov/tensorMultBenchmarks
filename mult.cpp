@@ -9,19 +9,15 @@ using namespace std;
 
 double timeProduct(int n) {
 
-    double min = 10000000000;
     MatrixXf a = MatrixXf::Random(n, n);
     MatrixXf b = MatrixXf::Random(n, n);
+    auto t2 = chrono::high_resolution_clock::now();
     for (int i = 0; i < 10; ++i) {
-        auto t2 = chrono::high_resolution_clock::now();
         b = a*b;
-        auto t3 = chrono::high_resolution_clock::now();
-        double duration = chrono::duration_cast<chrono::microseconds>(t3-t2).count()/1000.0;
-        if (duration < min)
-            min = duration;
     }
-    cout << b(0,0) << " ";
-    return min;
+    auto t3 = chrono::high_resolution_clock::now();
+    double duration = chrono::duration_cast<chrono::microseconds>(t3-t2).count()/1000.0;
+    return duration;
 }
 int main() {
 

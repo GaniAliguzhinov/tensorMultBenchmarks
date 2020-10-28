@@ -41,5 +41,7 @@ for i in range(100):
     n = 100+i*10
     timer = timeit.Timer("allocate(n)", "import numpy; from __main__ import allocate, n")
     t = 1000.0*timer.repeat(1,1)[0]
-    timer = timeit.Timer("matmul3(A, B)", "import tensorflow as tf; from __main__ import A,B,matmul3")
-    print("{:.3f} ".format(1000.0*numpy.min(timer.repeat(10, 1))), end='')
+    #timer = timeit.Timer("matmul2(A, B)", "import numpy; from __main__ import A,B,matmul2")
+    #timer = timeit.Timer("matmul3(A, B)", "import tensorflow as tf; from __main__ import A,B,matmul3")
+    timer = timeit.Timer("np.dot(A, B)", "import numpy as np; from __main__ import A,B")
+    print("{:.3f} ".format(1000.0*numpy.sum(timer.repeat(10, 1))), end='')
